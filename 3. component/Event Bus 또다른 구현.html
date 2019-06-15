@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<meta http-equiv="X-UA-Compatible" content="ie=edge">
+	<title>[VUE.js] TEST</title>
+</head>
+<body>
+	<div id="app">
+		<child-component></child-component>
+	</div>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/vue/2.6.10/vue.js"></script>
+    <script>
+		// const eventBus = new Vue();
+		const eventBus = {
+			events:{},
+			$on(event, handler) {
+				this.events[event] = (this.events[event] || new Set).add(handler);
+			},
+			$emit(event, ...data) {
+				if(this.events[event]) this.events[event].forEach(f=>f(...data));
+			}
+		};
+
+		Vue.component('child-component', {
+			template: `<div><p>하위영역 </p>
+			<button @click='showLog'>show</button>
+			</div>`,
+			data() {
+				return {
+					count:1
+				}
+			},
+			methods: {
+				showLog() {
+					eventBus.$emit('show-log', 'from child', this.count++);
+				}
+			}
+		});
+
+        const $vue = new Vue({
+            el: '#app',
+			data:{
+				message: 'Hello Vue! props data'
+			},
+			created() {
+				eventBus.$on('show-log', console.log);
+			}
+		});
+    </script>
+
+</body>
+</html>
