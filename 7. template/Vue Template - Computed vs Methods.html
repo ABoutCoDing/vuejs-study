@@ -15,7 +15,7 @@
         data: {
           message: 'Hello Vue.js!'
         },
-        computed: {
+        methods: {
           reverseMsg: function() {
             this.message = this.message.split('').reverse().join('');
             return this.message;
