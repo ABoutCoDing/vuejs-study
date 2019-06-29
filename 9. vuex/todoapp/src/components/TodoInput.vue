@@ -29,9 +29,7 @@
             addTodo() {
                 if (this.newTodoItem !== "") {
                     const value = this.newTodoItem.trim();
-                    // this.$emit('addTodo', value);
-                    // this.$store.state.todoItems.push(value);
-                    this.$store.dispatch('addTodo', value);
+                    this.$emit('addTodo', value);
                     this.clearInput();
                 } else {
                     this.showModal = !this.showModal;
