@@ -8,13 +8,13 @@ const state = {
 }
 
 const mutations = {
-    addTodo(state, todoItem) {
+    addTodo: (state, todoItem) => {
         localStorage.setItem(todoItem, todoItem);
         state.todoItems.push(todoItem);
-    }, removeAll(state) {
+    }, removeAll: (state) => {
         localStorage.clear();
         state.todoItems = [];
-    }, removeTodo(state, {todoItem, index}) {
+    }, removeTodo: (state, {todoItem, index}) => {
         localStorage.removeItem(todoItem);
         state.todoItems.splice(index, 1);
     }
@@ -32,18 +32,18 @@ const actions = {
     },
 }
     
-    const getters = {
+const getters = {
     getTodoItems: (state) => {
-    return state.todoItems;
+        return state.todoItems;
     }
-    }
+}
     
     
-    export default new Vuex.Store({
+export default new Vuex.Store({
     state,
     mutations,
     actions,
     getters,
-    })
+})
     
 
