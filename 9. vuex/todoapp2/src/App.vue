@@ -44,7 +44,8 @@
             if (localStorage.length > 0) {
                 for (let i=0; i<localStorage.length; i++) {
                     // this.todoItems.push(localStorage.key(i));
-                    this.$store.state.todoItems.push(localStorage.key(i));
+                    // this.$store.state.todoItems.push(localStorage.key(i));
+                    this.$store.dispatch('addTodo', localStorage.key(i));
                 }
             }
         },
